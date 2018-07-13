@@ -125,16 +125,17 @@ namespace HairSalon.Models
       return foundClient;
     }
 
+    // Find client by stylist name
     public static List<Client> Find(string inputName)
     {
       List<Client> foundClients = new List<Client> {};
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM clients WHERE name LIKE @Name;";
+      cmd.CommandText = @"SELECT * FROM clients WHERE stylist = @Name;";
       MySqlParameter searchName = new MySqlParameter();
       searchName.ParameterName = "@Name";
-      searchName.Value = inputName + '%';
+      searchName.Value = inputName;
       cmd.Parameters.Add(searchName);
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())

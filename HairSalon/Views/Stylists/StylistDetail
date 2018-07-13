@@ -1,0 +1,18 @@
+
+<h3>@Model[0].GetStylist() Client List:</h3>
+<ul>
+  @foreach(var client in Model)
+  {
+    <li>@client.GetName()</li>
+  }
+</ul>
+
+<h3>Add a New Client</h3>
+<form action="/stylist/addclient" method="post">
+  <div class="">
+    <label for="clientName">Client Name:</label>
+    <input type="text" name="clientName" required>
+    <input type="text" name="stylistName" hidden>
+  </div>
+  <button type="submit" class="">ADD</button>
+</form>
