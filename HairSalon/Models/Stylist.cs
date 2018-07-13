@@ -83,6 +83,60 @@ namespace HairSalon.Models
       return allStylists;
     }
 
+    public static Stylist Find(int inputId)
+    {
+      int id = 0;
+      string name = "";
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM stylists WHERE id = @Id;";
+      MySqlParameter searchId = new MySqlParameter();
+      searchId.ParameterName = "@Id";
+      searchId.Value = inputId;
+      cmd.Parameters.Add(searchId);
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        id = rdr.GetInt32(0);
+        name = rdr.GetString(1);
+      }
+      Stylist foundStylist = new Stylist(name, id);
+      conn.Close();
+      if (conn !=null)
+      {
+        conn.Dispose();
+      }
+      return foundStylist;
+    }
+
+    public static List<Stylist> Find(string inputName)
+    {
+      List<Stylist> foundStylists = new List<Stylist> {};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM stylists WHERE name LIKE @Name;";
+      MySqlParameter searchName = new MySqlParameter();
+      searchName.ParameterName = "@Name";
+      searchName.Value = inputName + '%';
+      cmd.Parameters.Add(searchName);
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        int id = rdr.GetInt32(0);
+        string name = rdr.GetString(1);
+        Stylist newStylist = new Stylist(name, id);
+        foundStylists.Add(newStylist);
+      }
+      conn.Close();
+      if (conn !=null)
+      {
+        conn.Dispose();
+      }
+      return foundStylists;
+    }
+
     public static void DeleteAll()
     {
       MySqlConnection conn = DB.Connection();
