@@ -33,7 +33,7 @@ namespace HairSalon.Tests
       Assert.AreEqual(name, resultName);
     }
     [TestMethod]
-    public void Equals_ReturnsTrueIfIdAndNameAreTheSame_FavRestaurant()
+    public void Equals_ReturnsTrueIfIdAndNameAreTheSame_Stylist()
     {
       // Arrange, Act
       Stylist firstStylist = new Stylist("testName", 1);
@@ -59,7 +59,7 @@ namespace HairSalon.Tests
       Assert.AreEqual(testId, result);
     }
     [TestMethod]
-    public void Save_SavesToDatabase_FavRestaurant()
+    public void SaveAndGetAll_SavesToDatabaseAndReturnAll_Stylist()
     {
       //Arrange
       Stylist testStylist = new Stylist("testName");
@@ -68,7 +68,7 @@ namespace HairSalon.Tests
       testStylist.Save();
       List<Stylist> result = Stylist.GetAll();
       List<Stylist> testList = new List<Stylist>{testStylist};
-      Console.WriteLine(result[0].GetId());
+
       //Assert
       CollectionAssert.AreEqual(testList, result);
     }
