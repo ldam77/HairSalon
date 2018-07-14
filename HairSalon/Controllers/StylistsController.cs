@@ -29,7 +29,14 @@ namespace HairSalon.Controllers
     [HttpGet("/stylists/{name}")]
     public ActionResult StylistDetail(string name)
     {
-      return View(Client.Find(name));
+      return View(Stylist.Find(name));
+    }
+    [HttpPost("/stylists/{stylistName}/addclient")]
+    public ActionResult AddClient(string stylistName, string clientName)
+    {
+      Client newClient = new Client(clientName, stylistName);
+      newClient.Save();
+      return RedirectToAction("StylistDetail", new { name = stylistName});
     }
   }
 }

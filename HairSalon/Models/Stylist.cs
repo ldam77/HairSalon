@@ -110,31 +110,31 @@ namespace HairSalon.Models
       return foundStylist;
     }
 
-    public static List<Stylist> Find(string inputName)
+    public static Stylist Find(string inputName)
     {
-      List<Stylist> foundStylists = new List<Stylist> {};
+      int id = 0;
+      string name = "";
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM stylists WHERE name LIKE @Name;";
+      cmd.CommandText = @"SELECT * FROM stylists WHERE name = @Name;";
       MySqlParameter searchName = new MySqlParameter();
       searchName.ParameterName = "@Name";
-      searchName.Value = inputName + '%';
+      searchName.Value = inputName;
       cmd.Parameters.Add(searchName);
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {
-        int id = rdr.GetInt32(0);
-        string name = rdr.GetString(1);
-        Stylist newStylist = new Stylist(name, id);
-        foundStylists.Add(newStylist);
+        id = rdr.GetInt32(0);
+        name = rdr.GetString(1);
       }
+      Stylist foundStylist = new Stylist(name, id);
       conn.Close();
       if (conn !=null)
       {
         conn.Dispose();
       }
-      return foundStylists;
+      return foundStylist;
     }
 
     public List<Client> GetClients()

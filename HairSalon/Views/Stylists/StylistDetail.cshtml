@@ -1,18 +1,21 @@
+<h1>@Model.GetName()</h1>
+<h3>Client List:</h3>
 
-<h3>@Model[0].GetStylist() Client List:</h3>
 <ul>
-  @foreach(var client in Model)
+  @foreach(var client in Model.GetClients())
   {
     <li>@client.GetName()</li>
   }
 </ul>
 
 <h3>Add a New Client</h3>
-<form action="/stylist/addclient" method="post">
+<form action="/stylists/@Model.GetName()/addclient" method="post">
   <div class="">
     <label for="clientName">Client Name:</label>
     <input type="text" name="clientName" required>
-    <input type="text" name="stylistName" hidden>
   </div>
   <button type="submit" class="">ADD</button>
 </form>
+
+<h3><a href="/stylists">List of Stylists</a></h3>
+<h3><a href="/">Home</a></h3>
