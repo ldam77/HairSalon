@@ -76,18 +76,16 @@ namespace HairSalon.Tests
     public void Find_FindStylistInDatabase_Stylist()
     {
       //Arrange
-      List<Stylist> testList = new List<Stylist> {};
       Stylist testStylist = new Stylist("testName");
       testStylist.Save();
-      testList.Add(testStylist);
 
       //Act
-      Stylist resultStylist = Stylist.Find(testStylist.GetId());
-      List<Stylist> resultList = Stylist.Find(testStylist.GetName());
+      Stylist resultById = Stylist.Find(testStylist.GetId());
+      Stylist resultByName = Stylist.Find(testStylist.GetName());
 
       //Assert
-      Assert.AreEqual(testStylist, resultStylist);
-      CollectionAssert.AreEqual(testList, resultList);
+      Assert.AreEqual(testStylist, resultById);
+      Assert.AreEqual(testStylist, resultByName);
     }
     [TestMethod]
     public void GetClients_RetrievesAllClientsWithStylistName_ClientList()
