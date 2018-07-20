@@ -87,25 +87,24 @@ namespace HairSalon.Tests
       Assert.AreEqual(testStylist, resultById);
       Assert.AreEqual(testStylist, resultByName);
     }
-    // Not sure why this test fail, every check look identical...and the method work
-    // [TestMethod]
-    // public void GetClients_RetrievesAllClientsWithStylistName_ClientList()
-    // {
-    //   // Arrange
-    //   Stylist testStylist = new Stylist("testStylist");
-    //   testStylist.Save();
-    //   Client firstClient = new Client("testName1", testStylist.GetName());
-    //   firstClient.Save();
-    //   Client secondClient = new Client("testName2", testStylist.GetName());
-    //   secondClient.Save();
-    //
-    //   // Act
-    //   List<Client> testClientList = new List<Client> {firstClient, secondClient};
-    //   List<Client> resultClientList = testStylist.GetClients();
-    //   Console.WriteLine(testClientList.Count + testClientList[0].GetId() + testClientList[0].GetName() + testClientList[0].GetStylist() + testClientList[1].GetId() + testClientList[1].GetName() + testClientList[1].GetStylist());
-    //   Console.WriteLine(resultClientList.Count + resultClientList[0].GetId() + resultClientList[0].GetName() + resultClientList[0].GetStylist() + resultClientList[1].GetId() + resultClientList[1].GetName() + resultClientList[1].GetStylist());
-    //   // Assert
-    //   CollectionAssert.AreEqual(testClientList, resultClientList);
+
+    [TestMethod]
+    public void GetClients_RetrievesAllClientsWithStylistName_ClientList()
+    {
+      // Arrange
+      Stylist testStylist = new Stylist("testStylist");
+      testStylist.Save();
+      Client firstClient = new Client("testName1", testStylist.GetId());
+      firstClient.Save();
+      Client secondClient = new Client("testName2", testStylist.GetId());
+      secondClient.Save();
+
+      // Act
+      List<Client> testClientList = new List<Client> {firstClient, secondClient};
+      List<Client> resultClientList = testStylist.GetClients();
+
+      // Assert
+      CollectionAssert.AreEqual(testClientList, resultClientList);
     }
   }
 }

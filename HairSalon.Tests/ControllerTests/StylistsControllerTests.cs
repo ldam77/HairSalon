@@ -52,7 +52,7 @@ namespace HairSalon.Tests
       StylistsController controller = new StylistsController();
 
       //Act
-      ActionResult indexView = controller.StylistDetail("testName");
+      ActionResult indexView = controller.StylistDetail(1);
 
       //Assert
       Assert.IsInstanceOfType(indexView, typeof(ViewResult));
@@ -61,7 +61,7 @@ namespace HairSalon.Tests
     public void StylistDetail_HasCorrectModelType_StylistList()
     {
       //Arrange
-      ViewResult indexView = new StylistsController().StylistDetail("testName") as ViewResult;
+      ViewResult indexView = new StylistsController().StylistDetail(1) as ViewResult;
 
       //Act
       var result = indexView.ViewData.Model;

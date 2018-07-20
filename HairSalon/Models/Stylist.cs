@@ -143,18 +143,18 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM clients WHERE stylist = @Name;";
-      MySqlParameter searchName = new MySqlParameter();
-      searchName.ParameterName = "@Name";
-      searchName.Value = this.name;
-      cmd.Parameters.Add(searchName);
+      cmd.CommandText = @"SELECT * FROM clients WHERE stylist_id = @IdMatch;";
+      MySqlParameter searchId = new MySqlParameter();
+      searchId.ParameterName = "@IdMatch";
+      searchId.Value = this.id;
+      cmd.Parameters.Add(searchId);
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {
         int id = rdr.GetInt32(0);
         string client = rdr.GetString(1);
-        string stylist = rdr.GetString(2);
-        Client foundClient = new Client(client, stylist, id);
+        int stylistId = rdr.GetInt32(2);
+        Client foundClient = new Client(client, stylistId, id);
         allClients.Add(foundClient);
       }
       conn.Close();

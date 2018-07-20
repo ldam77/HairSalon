@@ -22,25 +22,25 @@ namespace HairSalon.Tests
       // Arrange
       int id = 1;
       string name = "testName";
-      string stylist = "testStylist";
-      Client testClient = new Client(name, stylist, id);
+      int stylistId = 1;
+      Client testClient = new Client(name, stylistId, id);
 
       // Act
       int resultId = testClient.GetId();
       string resultName = testClient.GetName();
-      string resultStylist = testClient.GetStylist();
+      int resultStylistId = testClient.GetStylistId();
 
       // Assert
       Assert.AreEqual(id, resultId);
       Assert.AreEqual(name, resultName);
-      Assert.AreEqual(stylist, resultStylist);
+      Assert.AreEqual(stylistId, resultStylistId);
     }
     [TestMethod]
     public void Equals_ReturnsTrueIfIdAndNameAreTheSame_Client()
     {
       // Arrange, Act
-      Client firstClient = new Client("testName", "testStylist", 1);
-      Client secondClient = new Client("testName", "testStylist", 1);
+      Client firstClient = new Client("testName", 1, 1);
+      Client secondClient = new Client("testName", 1, 1);
 
       // Assert
       Assert.AreEqual(firstClient, secondClient);
@@ -49,7 +49,7 @@ namespace HairSalon.Tests
     public void Save_AssignsIdToObject_Id()
     {
       //Arrange
-      Client testClient = new Client("testName", "testStylist");
+      Client testClient = new Client("testName", 1);
 
       //Act
       testClient.Save();
@@ -65,7 +65,7 @@ namespace HairSalon.Tests
     public void SaveAndGetAll_SavesToDatabaseAndReturnAll_Client()
     {
       //Arrange
-      Client testClient = new Client("testName", "testStylist");
+      Client testClient = new Client("testName", 1);
 
       //Act
       testClient.Save();
@@ -80,13 +80,13 @@ namespace HairSalon.Tests
     {
       //Arrange
       List<Client> testList = new List<Client> {};
-      Client testClient = new Client("testName", "testStylist");
+      Client testClient = new Client("testName", 1);
       testClient.Save();
       testList.Add(testClient);
 
       //Act
       Client resultClient = Client.Find(testClient.GetId());
-      List<Client> resultList = Client.Find(testClient.GetName());
+      List<Client> resultList = Client.FindByStylistId(testClient.GetStylistId());
 
       //Assert
       Assert.AreEqual(testClient, resultClient);

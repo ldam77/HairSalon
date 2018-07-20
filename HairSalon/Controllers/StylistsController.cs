@@ -26,17 +26,17 @@ namespace HairSalon.Controllers
       newStylist.Save();
       return RedirectToAction("Index");
     }
-    [HttpGet("/stylists/{name}")]
-    public ActionResult StylistDetail(string name)
+    [HttpGet("/stylists/{id}")]
+    public ActionResult StylistDetail(int id)
     {
-      return View(Stylist.Find(name));
+      return View(Stylist.Find(id));
     }
-    [HttpPost("/stylists/{stylistName}/addclient")]
-    public ActionResult AddClient(string stylistName, string clientName)
+    [HttpPost("/stylists/{stylistId}/addclient")]
+    public ActionResult AddClient(int stylistId, string clientName)
     {
-      Client newClient = new Client(clientName, stylistName);
+      Client newClient = new Client(clientName, stylistId);
       newClient.Save();
-      return RedirectToAction("StylistDetail", new { name = stylistName});
+      return RedirectToAction("StylistDetail", new { id = stylistId});
     }
   }
 }
