@@ -4,7 +4,10 @@
 <ul>
   @foreach(var client in Model.GetClients())
   {
-    <li>@client.GetName()</li>
+    <form class="" action="/stylists/@Model.GetId()/deleteclient" method="post">
+      <input type="text" name="clientId" value="@client.GetId()" hidden>
+      <li>@client.GetName() <button type="submit" class="">DELETE</button></li>
+    </form>
   }
 </ul>
 

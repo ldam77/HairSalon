@@ -1,0 +1,10 @@
+<h1>List of Clients</h1>
+<ul>
+  @foreach(var client in Model)
+  {
+    <li><a href="/clients/@client.GetId()">@client.GetName()</a></li>
+  }
+</ul>
+
+<h3><a href="/">Home</a></h3>
+<h3><a href="/clients/new">Add a Client</a></h3>

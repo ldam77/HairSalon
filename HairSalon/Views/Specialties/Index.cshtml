@@ -1,0 +1,10 @@
+<h1>List of Specialties</h1>
+<ul>
+  @foreach(var specialty in Model)
+  {
+    <li><a href="/specialties/@specialty.GetId()">@specialty.GetName()</a></li>
+  }
+</ul>
+
+<h3><a href="/">Home</a></h3>
+<h3><a href="/specialties/new">Add a Specialty</a></h3>
