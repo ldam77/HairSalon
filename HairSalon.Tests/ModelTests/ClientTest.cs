@@ -93,7 +93,7 @@ namespace HairSalon.Tests
       CollectionAssert.AreEqual(testList, resultList);
     }
     [TestMethod]
-    public void Changename_ChangeClientNameInDatabase_Client()
+    public void ChangeName_ChangeClientNameInDatabase_Client()
     {
       // Arrange
       Client testClient = new Client("testName1", 1);
@@ -105,6 +105,20 @@ namespace HairSalon.Tests
 
       // Assert
       Assert.AreEqual(testName, Client.Find(testClient.GetId()).GetName());
+    }
+    [TestMethod]
+    public void ChangeStylistId_ChangeClientStylistIdInDatabase_Client()
+    {
+      // Arrange
+      Client testClient = new Client("testName1", 1);
+      testClient.Save();
+      int testStylistId = 2;
+
+      // Act
+      testClient.ChangeStylistId(testStylistId);
+
+      // Assert
+      Assert.AreEqual(testStylistId, Client.Find(testClient.GetId()).GetStylistId());
     }
     [TestMethod]
     public void Delete_DeleteClientFromDatabase_Client()
