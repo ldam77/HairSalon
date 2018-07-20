@@ -78,33 +78,34 @@ namespace HairSalon.Tests
       //Arrange
       Stylist testStylist = new Stylist("testName");
       testStylist.Save();
+      List<Stylist> testList = new List<Stylist> {testStylist};
 
       //Act
       Stylist resultById = Stylist.Find(testStylist.GetId());
-      Stylist resultByName = Stylist.Find(testStylist.GetName());
+      List<Stylist> resultByName = Stylist.Find(testStylist.GetName());
 
       //Assert
       Assert.AreEqual(testStylist, resultById);
-      Assert.AreEqual(testStylist, resultByName);
+      CollectionAssert.AreEqual(testList, resultByName);
     }
 
     [TestMethod]
-    public void GetClients_RetrievesAllClientsWithStylistName_ClientList()
+    public void GetSpecialties_RetrievesAllSpecialtiesWithStylistId_SpecialtyList()
     {
       // Arrange
       Stylist testStylist = new Stylist("testStylist");
       testStylist.Save();
-      Client firstClient = new Client("testName1", testStylist.GetId());
-      firstClient.Save();
-      Client secondClient = new Client("testName2", testStylist.GetId());
-      secondClient.Save();
+      Specialty testSpecialty = new Specialty("testSpecialty");
+      testSpecialty.Save();
+      StylistSpecialty testStylistSpecialty = new StylistSpecialty(testStylist.GetId(), testSpecialty.GetId());
+      testStylistSpecialty.Save();
+      List<Specialty> testSpecialties = new List<Specialty> {testSpecialty};
 
       // Act
-      List<Client> testClientList = new List<Client> {firstClient, secondClient};
-      List<Client> resultClientList = testStylist.GetClients();
+      List<Specialty> resultSpecialties = testStylist.GetSpecialties();
 
       // Assert
-      CollectionAssert.AreEqual(testClientList, resultClientList);
+      CollectionAssert.AreEqual(testSpecialties, resultSpecialties);
     }
   }
 }
