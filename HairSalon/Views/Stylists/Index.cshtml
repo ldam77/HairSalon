@@ -2,7 +2,10 @@
 <ul>
   @foreach(var stylist in Model)
   {
-    <li><a href="/stylists/@stylist.GetId()">@stylist.GetName()</a></li>
+    <form class="" action="/stylists/delete" method="post">
+      <input type="number" name="stylistId" value="@stylist.GetId()" hidden>
+      <li><a href="/stylists/@stylist.GetId()">@stylist.GetName()</a> <button type="submit" name="button">Delete</button></li>
+    </form>
   }
 </ul>
 

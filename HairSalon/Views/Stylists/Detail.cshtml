@@ -1,4 +1,11 @@
-<h1>@Model.GetName()</h1>
+<h1>@Model.GetName()'s Detail Page</h1>
+
+<form class="" action="/stylists/@Model.GetId()/changename" method="post">
+  <label for="newName">Edit Stylist Name:</label>
+  <input type="text" name="newName" required>
+  <button type="submit" name="button">Edit</button>
+</form>
+
 <h3>Client List:</h3>
 
 <ul>
@@ -18,6 +25,11 @@
     <input type="text" name="clientName" required>
   </div>
   <button type="submit" class="">ADD</button>
+</form>
+
+<form class="" action="/stylists/delete" method="post">
+  <input type="text" name="stylistId" value="@Model.GetId()" hidden>
+  <button type="submit" class="">DELETE THIS STYLISH RECORD</button>
 </form>
 
 <h3><a href="/stylists">List of Stylists</a></h3>
