@@ -1,0 +1,29 @@
+@using HairSalon.Models;
+
+<h1>@Model.GetName()'s Detail Page</h1>
+<form class="" action="/clients/@Model.GetId()/changename" method="post">
+  <label for="newName">Edit Client Name:</label>
+  <input type="text" name="newName" required>
+  <button type="submit" name="button">Edit</button>
+</form>
+
+<h3>Stylist: @Model.GetStylist().GetName()</h3>
+<form class="" action="/clients/@Model.GetId()/changestylist" method="post">
+  <div class="">
+    Change stylist:
+    <select class="" name="stylistId">
+      @foreach(var stylist in Stylist.GetAll())
+      {
+        <option value="@stylist.GetId()">@stylist.GetName()</option>
+      }
+    </select>
+  </div>
+  <button type="submit" name="button">Switch Stylist</button>
+</form>
+
+<form class="" action="/clients/delete" method="post">
+  <input type="text" name="clientId" value="@Model.GetId()" hidden>
+  <button type="submit" class="">DELETE THIS CLIENT RECORD</button>
+</form>
+
+<h3><a href="/">Home</a></h3>
