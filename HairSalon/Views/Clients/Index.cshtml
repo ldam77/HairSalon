@@ -2,7 +2,10 @@
 <ul>
   @foreach(var client in Model)
   {
-    <li><a href="/clients/@client.GetId()">@client.GetName()</a></li>
+    <form class="" action="/clients/delete" method="post">
+      <input type="text" name="clientId" value="@client.GetId()" hidden>
+    <li><a href="/clients/@client.GetId()">@client.GetName()</a>; Stylist: @client.GetStylist().GetName() <button type="submit" class="">DELETE</button></li>
+  </form>
   }
 </ul>
 

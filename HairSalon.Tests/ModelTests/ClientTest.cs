@@ -79,18 +79,29 @@ namespace HairSalon.Tests
     public void Find_FindClientInDatabase_Client()
     {
       //Arrange
-      List<Client> testList = new List<Client> {};
       Client testClient = new Client("testName", 1);
       testClient.Save();
-      testList.Add(testClient);
 
       //Act
       Client resultClient = Client.Find(testClient.GetId());
-      List<Client> resultList = Client.FindByStylistId(testClient.GetStylistId());
 
       //Assert
       Assert.AreEqual(testClient, resultClient);
-      CollectionAssert.AreEqual(testList, resultList);
+    }
+    [TestMethod]
+    public void FindStylist_FindThisClientStylist_ReturnStylist()
+    {
+      // Arrange
+      Stylist testStylist = new Stylist("testStylist");
+      testStylist.Save();
+      Client testClient = new Client("testClient", testStylist.GetId());
+      testClient.Save();
+
+      // Act
+      Stylist resultStylist = testClient.GetStylist();
+
+      // Assert
+      Assert.AreEqual(testStylist, resultStylist);
     }
     [TestMethod]
     public void ChangeName_ChangeClientNameInDatabase_Client()
