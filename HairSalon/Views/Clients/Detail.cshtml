@@ -7,7 +7,7 @@
   <button type="submit" name="button">Edit</button>
 </form>
 
-<h3>Stylist: @Model.GetStylist().GetName()</h3>
+<h3>Stylist: <a href="/stylists/@Model.GetStylist().GetId()">@Model.GetStylist().GetName()</a></h3>
 <form class="" action="/clients/@Model.GetId()/changestylist" method="post">
   <div class="">
     Change stylist:

@@ -1,3 +1,5 @@
+@using HairSalon.Models
+
 <h1>@Model.GetName()'s Detail Page</h1>
 
 <form class="" action="/stylists/@Model.GetId()/changename" method="post">
@@ -6,15 +8,34 @@
   <button type="submit" name="button">Edit</button>
 </form>
 
+<h3>Specialties:</h3>
+<ul>
+  @foreach(var specialty in Model.GetSpecialties())
+  {
+    <form class="" action="/stylists/@Model.GetId()/removespecialty" method="post">
+      <input type="number" name="specialtyId" value="@specialty.GetId()" hidden>
+      <li>@specialty.GetName() <button type="submit" name="button">Remove</button></li>
+    </form>
+  }
+</ul>
+
+<h3>Add Specialty</h3>
+<form class="" action="/stylists/@Model.GetId()/addspecialty" method="post">
+  <select class="" name="specialtyId">
+    @foreach(var specialty in Specialty.GetAll())
+    {
+      <option value="@specialty.GetId()">@specialty.GetName()</option>
+    }
+  </select>
+  <button type="submit" name="button">Add Specialty</button>
+</form>
+
 <h3>Client List:</h3>
 
 <ul>
   @foreach(var client in Model.GetClients())
   {
-    <form class="" action="/stylists/@Model.GetId()/deleteclient" method="post">
-      <input type="text" name="clientId" value="@client.GetId()" hidden>
-      <li>@client.GetName() <button type="submit" class="">DELETE</button></li>
-    </form>
+    <li><a href="/clients/@client.GetId()">@client.GetName()</a></li>
   }
 </ul>
 

@@ -50,10 +50,17 @@ namespace HairSalon.Controllers
       newClient.Save();
       return RedirectToAction("Detail", new { id = stylistId});
     }
-    [HttpPost("/stylists/{stylistId}/deleteclient")]
-    public ActionResult DeleteClient(int stylistId, string clientId)
+    [HttpPost("/stylists/{stylistId}/addspecialty")]
+    public ActionResult AddSpecialty(int stylistId, int specialtyId)
     {
-      Client.Find(int.Parse(clientId)).Delete();
+      StylistSpecialty newPair = new StylistSpecialty(stylistId, specialtyId);
+      newPair.Save();
+      return RedirectToAction("Detail", new { id = stylistId});
+    }
+    [HttpPost("/stylists/{stylistId}/removespecialty")]
+    public ActionResult RemoveSpecialty(int stylistId, int specialtyId)
+    {
+      Stylist.Find(stylistId).RemoveSpecialty(specialtyId);
       return RedirectToAction("Detail", new { id = stylistId});
     }
   }

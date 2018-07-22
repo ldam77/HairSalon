@@ -215,6 +215,28 @@ namespace HairSalon.Models
       }
     }
 
+    public void RemoveSpecialty(int specialtyId)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM stylists_specialties WHERE stylist_id = @stylistId AND specialty_id = @specialtyId;";
+      MySqlParameter searchStylistId = new MySqlParameter();
+      searchStylistId.ParameterName = "@stylistId";
+      searchStylistId.Value = this.id;
+      cmd.Parameters.Add(searchStylistId);
+      MySqlParameter searchSpecialtyId = new MySqlParameter();
+      searchSpecialtyId.ParameterName = "@specialtyId";
+      searchSpecialtyId.Value = specialtyId;
+      cmd.Parameters.Add(searchSpecialtyId);
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
     public void Delete()
     {
       MySqlConnection conn = DB.Connection();
@@ -239,7 +261,7 @@ namespace HairSalon.Models
       conn.Open();
 
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM stylists;";
+      cmd.CommandText = @"DELETE FROM stylists; DELETE FROM clients; DELETE FROM stylists_specialties;";
       cmd.ExecuteNonQuery();
 
       cmd.CommandText = @"DELETE FROM clients;";

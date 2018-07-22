@@ -46,22 +46,22 @@ namespace HairSalon.Tests
       Assert.IsInstanceOfType(indexView, typeof(ViewResult));
     }
     [TestMethod]
-    public void StylistDetail_ReturnsCorrectView_True()
+    public void Detail_ReturnsCorrectView_True()
     {
       //Arrange
       StylistsController controller = new StylistsController();
 
       //Act
-      ActionResult indexView = controller.StylistDetail(1);
+      ActionResult indexView = controller.Detail(1);
 
       //Assert
       Assert.IsInstanceOfType(indexView, typeof(ViewResult));
     }
     [TestMethod]
-    public void StylistDetail_HasCorrectModelType_StylistList()
+    public void Detail_HasCorrectModelType_StylistList()
     {
       //Arrange
-      ViewResult indexView = new StylistsController().StylistDetail(1) as ViewResult;
+      ViewResult indexView = new StylistsController().Detail(1) as ViewResult;
 
       //Act
       var result = indexView.ViewData.Model;
