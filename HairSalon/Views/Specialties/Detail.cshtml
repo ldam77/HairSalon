@@ -1,0 +1,26 @@
+@using HairSalon.Models
+
+<h1>@Model.GetName()'s Detail Page</h1>
+
+<h3>Stylist List:</h3>
+
+<ul>
+  @foreach(var stylist in Model.GetStylists())
+  {
+    <li>@stylist.GetName()</li>
+  }
+</ul>
+
+<h3>Add a stylist to this specialty</h3>
+<form class="" action="/specialties/@Model.GetId()/addstylist" method="post">
+  Select Stylist:
+  <select class="" name="stylistId">
+    @foreach(var stylist in Stylist.GetAll())
+    {
+      <option value="@stylist.GetId()">@stylist.GetName()</option>
+    }
+  </select>
+  <button type="submit" name="button">Add Stylist</button>
+</form>
+
+<h3><a href="/">Home</a></h3>

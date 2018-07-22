@@ -19,5 +19,24 @@ namespace HairSalon.Controllers
     {
       return View();
     }
+    [HttpPost("/specialties/new")]
+    public ActionResult AddSpecialty(string specialtyName)
+    {
+      Specialty newSpecialty = new Specialty(specialtyName);
+      newSpecialty.Save();
+      return RedirectToAction("Index");
+    }
+    [HttpGet("/specialties/{id}")]
+    public ActionResult Detail(int id)
+    {
+      return View(Specialty.Find(id));
+    }
+    [HttpPost("/specialties/{specialtyId}/addstylist")]
+    public ActionResult AddStylist(int specialtyId, int stylistId)
+    {
+      StylistSpecialty newPair = new StylistSpecialty(stylistId, specialtyId);
+      newPair.Save();
+      return RedirectToAction("Detail", new { id = specialtyId});
+    }
   }
 }
