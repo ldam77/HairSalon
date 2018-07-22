@@ -1,4 +1,7 @@
 @using HairSalon.Models
+@{
+  Layout = "_Layout";
+}
 
 <h1>@Model.GetName()'s Detail Page</h1>
 
@@ -44,13 +47,14 @@
   <div class="">
     <label for="clientName">Client Name:</label>
     <input type="text" name="clientName" required>
+    <button type="submit" class="">ADD</button>
   </div>
-  <button type="submit" class="">ADD</button>
-</form>
 
+</form>
+<br>
 <form class="" action="/stylists/delete" method="post">
   <input type="text" name="stylistId" value="@Model.GetId()" hidden>
-  <button type="submit" class="">DELETE THIS STYLISH RECORD</button>
+  <button type="submit" class="btn btn-danger">DELETE THIS STYLIST RECORD</button>
 </form>
 
 <h3><a href="/stylists">List of Stylists</a></h3>

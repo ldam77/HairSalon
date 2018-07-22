@@ -1,4 +1,8 @@
-@using HairSalon.Models;
+@using HairSalon.Models
+@{
+  Layout = "_Layout";
+}
+
 
 <h1>@Model.GetName()'s Detail Page</h1>
 <form class="" action="/clients/@Model.GetId()/changename" method="post">
@@ -20,10 +24,10 @@
   </div>
   <button type="submit" name="button">Switch Stylist</button>
 </form>
-
+<br>
 <form class="" action="/clients/delete" method="post">
   <input type="text" name="clientId" value="@Model.GetId()" hidden>
-  <button type="submit" class="">DELETE THIS CLIENT RECORD</button>
+  <button type="submit" class="btn btn-danger">DELETE THIS CLIENT RECORD</button>
 </form>
 
 <h3><a href="/">Home</a></h3>

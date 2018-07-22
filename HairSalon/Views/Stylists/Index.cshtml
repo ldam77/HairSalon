@@ -1,10 +1,14 @@
+@{
+  Layout = "_Layout";
+}
+
 <h1>List of Stylists</h1>
 <ul>
   @foreach(var stylist in Model)
   {
     <form class="" action="/stylists/delete" method="post">
       <input type="number" name="stylistId" value="@stylist.GetId()" hidden>
-      <li><a href="/stylists/@stylist.GetId()">@stylist.GetName()</a> <button type="submit" name="button">Delete</button></li>
+      <li><a href="/stylists/@stylist.GetId()">@stylist.GetName()</a> <button type="submit" name="button" class="btn btn-danger">Delete</button></li>
     </form>
   }
 </ul>
