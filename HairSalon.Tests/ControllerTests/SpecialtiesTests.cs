@@ -69,5 +69,17 @@ namespace HairSalon.Tests
       //Assert
       Assert.IsInstanceOfType(result, typeof(Specialty));
     }
+    [TestMethod]
+    public void SearchForm_ReturnsCorrectView_True()
+    {
+      //Arrange
+      SpecialtiesController controller = new SpecialtiesController();
+
+      //Act
+      ActionResult indexView = controller.SearchForm();
+
+      //Assert
+      Assert.IsInstanceOfType(indexView, typeof(ViewResult));
+    }
   }
 }

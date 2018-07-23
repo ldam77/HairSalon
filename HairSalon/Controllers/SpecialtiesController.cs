@@ -38,5 +38,15 @@ namespace HairSalon.Controllers
       newPair.Save();
       return RedirectToAction("Detail", new { id = specialtyId});
     }
+    [HttpGet("/specialties/search")]
+    public ActionResult SearchForm()
+    {
+      return View();
+    }
+    [HttpPost("/specialties/search")]
+    public ActionResult Search(string searchName)
+    {
+      return View("Index", Specialty.Find(searchName));
+    }
   }
 }
